@@ -16,6 +16,17 @@ class View {
 		this.app.append(this.title, this.taskList)
 	}
 
+	displayTasks(tasks){
+		tasks.forEach(task => {
+			const li = this.setElement('li')
+			li.id = task.id
+			const span = this.setElement('span')
+			span.textContent = task.text
+			li.append(span)
+			this.taskList.append(li)
+		})
+	}
+
 	getElement(selector){
 		const element = document.querySelector(selector)
 		return element
@@ -34,6 +45,12 @@ class Controller {
 	constructor(model, view) {
 		this.model = model
 		this.view = view
+
+		this.displayTasks(this.model.tasks)
+	}
+
+	displayTasks = tasks => {
+		this.view.displayTasks(tasks)
 	}
 }
 
